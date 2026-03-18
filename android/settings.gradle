@@ -1,1 +1,21 @@
 include ':app'
+
+def localPropertiesFile = new File(rootProject.projectDir, "local.properties")
+def properties = new Properties()
+
+// GitHub Actions 환경에서는 local.properties가 없을 수 있으므로 예외 처리
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader("UTF-8") { reader -> properties.load(reader) }
+}
+
+def flutterSdkPath = properties.getProperty("flutter.sdk")
+if (flutterSdkPath == null) {
+    // GitHub Actions 환경에서 Flutter SDK 경로를 환경 변수에서 가져옵니다.
+    flutterSdkPath = System.getenv("FLUTTER_ROOT")
+}
+
+if (flutterSdkPath == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in local.properties or FLUTTER_ROOT env variable.")
+}
+
+apply from: "$flutterSdkPath/packages/flutter_tools/gradle/app_plugin_loader.gradle"
