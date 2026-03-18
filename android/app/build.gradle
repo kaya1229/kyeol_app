@@ -1,36 +1,31 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
-// Flutter Gradle 연결을 위한 핵심 설정
-def flutterRoot = System.getenv("FLUTTER_HOME") ?: ""
-
 android {
-    namespace "com.example.kyeol_app"
-    compileSdkVersion 33
+    // 8.1.0 버전에서는 이 namespace가 필수입니다!
+    namespace "com.example.kyeol_app" 
+    
+    compileSdkVersion 34 // 최신 버전에 맞춰 34로 상향
 
     defaultConfig {
         applicationId "com.example.kyeol_app"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17 // Gradle 8.1은 자바 17을 선호합니다.
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.0"
-}
-
-// 빌드 로봇이 Flutter 엔진을 찾을 수 있도록 명시적으로 알려줍니다.
-if (flutterRoot != "") {
-    apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+    // 프로젝트 수준에서 정한 1.9.0 버전을 따라갑니다.
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
