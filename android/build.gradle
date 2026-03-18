@@ -6,7 +6,6 @@ buildscript {
     }
 
     dependencies {
-        // 이 줄이 플러터와 안드로이드를 연결하는 핵심 다리입니다!
         classpath 'com.android.tools.build:gradle:8.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
