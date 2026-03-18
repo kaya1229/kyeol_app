@@ -1,24 +1,20 @@
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file('local.properties')
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader('UTF-8') { reader ->
-        localProperties.load(reader)
-    }
-}
-
-def flutterRoot = localProperties.getProperty('flutter.sdk')
-if (flutterRoot == null) {
-    // 로컬 환경이 아닌 GitHub Actions 환경을 위한 기본값 설정
-    flutterRoot = "" 
-}
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+// Flutter Gradle 연결을 위한 핵심 설정
+def flutterRoot = System.getenv("FLUTTER_HOME") ?: ""
 
 android {
-    // 로봇이 찾던 바로 그 설정들입니다!
+    namespace "com.example.kyeol_app"
     compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "com.example.kyeol_app"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -28,31 +24,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-
-    defaultConfig {
-        applicationId "com.example.kyeol_app"
-        // 최소 안드로이드 21 버전(롤리팝) 이상에서 실행되게 합니다.
-        minSdkVersion 21
-        targetSdkVersion 33
-        versionCode 1
-        versionName "1.0"
-    }
-
-    buildTypes {
-        release {
-            signingConfig signingConfigs.debug
-        }
-    }
-}
-
-flutter {
-    source '../..'
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.0"
+}
+
+// 빌드 로봇이 Flutter 엔진을 찾을 수 있도록 명시적으로 알려줍니다.
+if (flutterRoot != "") {
+    apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 }
