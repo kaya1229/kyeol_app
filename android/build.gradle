@@ -1,6 +1,6 @@
 buildscript {
     // 1.9.0이나 1.9.22보다 더 확실한 최신 버전으로 올립니다.
-    ext.kotlin_version = '2.0.0' 
+    ext.kotlin_version = '1.9.22' 
     repositories {
         google()
         mavenCentral()
