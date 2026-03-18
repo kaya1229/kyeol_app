@@ -26,8 +26,8 @@ jobs:
         run: flutter pub get
 
       # 이 단계를 추가하면 로봇이 자동으로 아이콘을 크기별로 자릅니다!
-      - name: Generate Icons
-        run: flutter pub run flutter_launcher_icons
+      #- name: Generate Icons
+      #  run: flutter pub run flutter_launcher_icons
 
       # 4. APK 빌드
       - name: Build APK
