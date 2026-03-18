@@ -1,14 +1,13 @@
 buildscript {
-    // 1.9.0이나 1.9.22보다 더 확실한 최신 버전으로 올립니다.
-    ext.kotlin_version = '1.9.22' 
+    ext.kotlin_version = '1.9.22'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        // Gradle 플러그인 버전도 호환성을 위해 유지하거나 확인합니다.
-        classpath 'com.android.tools.build:gradle:8.1.0'
+        // 플러터 3.41 버전과 찰떡궁합인 안드로이드 빌드 도구 버전입니다.
+        classpath 'com.android.tools.build:gradle:8.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
