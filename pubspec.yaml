@@ -16,12 +16,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  # 아이콘 제작 로봇 소환!
   flutter_launcher_icons: "^0.13.1"
 
 flutter_launcher_icons:
-  android: true
+  android: "launcher_icon" # true 대신 이름을 직접 지정 (더 안정적임)
   ios: true
-  image_path: "assets/icon/icon.png" # 사용자님이 올린 파일 이름과 똑같아야 함!
-  adaptive_icon_background: "#F5F5DC" # 아이콘 배경색 (베이지)
-  adaptive_icon_foreground: "assets/icon/icon.png"
+  image_path: "assets/icon/icon.png"
+  # 아래 두 줄(adaptive)을 잠시 지우거나 주석 처리하고 테스트해 보세요!
+  # adaptive_icon_background: "#F5F5DC" 
+  # adaptive_icon_foreground: "assets/icon/icon.png"
